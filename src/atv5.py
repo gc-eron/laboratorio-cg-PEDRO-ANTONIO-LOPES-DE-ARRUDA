@@ -9,12 +9,24 @@ img = np.array(foto)
 st.header("1. HSV")
 col1, col2 = st.columns(2)
 
-cor = np.uint8([[[230, 140, 60]]])
-hsv = cv2.cvtColor(cor, cv2.COLOR_RGB2HSV)
+cor = np.uint8([[[230, 140, 60]]]) ## cor em RGB
+st.image(cor, caption="cor")
+
+hsv = cv2.cvtColor(cor, cv2.COLOR_RGB2HSV) ## De RGB para HSV
 st.text(hsv[0, 0])
 
-rgb = cv2.cvtColor(hsv, cv2.COLOR_HSV2RGB)## De volta para RGB
-st.text(rgb[0, 0])
+rgb = cv2.cvtColor(hsv, cv2.COLOR_HSV2RGB) ## De volta para RGB
+st.image(rgb, caption="rgb")
+
+##Montando as imagens
+hsv = cv2.cvtColor(img, cv2.COLOR_RGB2HSV)
+col1.image(img, caption="img")
+
+so_h = hsv.copy()
+so_h[:, :, 1] = 255
+so_h[:, :, 2] = 255
+rgb = cv2.cvtColor(so_h, cv2.COLOR_HSV2RGB) ## De volta para RGB
+col2.image(rgb, caption="H")
 
 
 # 2. Mudando o HSV
